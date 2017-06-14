@@ -1,6 +1,5 @@
 
 
-// As a user when I click on a position, the position changes color so that I can tell that a position has been torpedoed.
 
 // As a user I can see how many torpedoes I have used, so that I can keep track of how many I have used.
 
@@ -10,6 +9,14 @@
 // *******  Controler ******* //
 $(document).ready(function(){
   createTable()
+  var clickCount= 0
+  // As a user when I click on a position, the position changes color so that I can tell that a position has been torpedoed.
+  $("td").on("click",function(){
+    var id= $(this).attr("id")
+    $("#"+id).css("background-color", "tomato")
+    clickCount++
+    $("#counter").text(clickCount)
+  })//end of click change color
 })
 
  // end of Doc Ready
@@ -24,7 +31,7 @@ function createTable() {
       $("#boardTable").append("<tr id="
       + i + " class='boardRow'></tr>");
       for(var j = 0; j < 10; j++) {
-        $("#" + i).append("<td id=" + i + j + " class='boardCell'></td>");
+        $("#" + i).append("<td id=" + i + j + " class='boardCell' ></td>");
       } // end for loop to create the columns
     } // end for loop to create the rows
 } // end of function createTable

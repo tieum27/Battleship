@@ -4,7 +4,12 @@ table {
 
 }
 
-td {
+#counter {
+  width: 100px;
+  height: 40px;
+}
+
+td  {
   border: 5px;
   border-color: black;
   border-style: solid;
