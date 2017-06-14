@@ -1,26 +1,22 @@
-
-
-
-
-// As a user once a position has been torpedoed, it cannot be torpedoed again so that I don't waste torpedoes.
-
-
 // *******  Controler ******* //
 $(document).ready(function(){
   createTable()
+  createBoardArray()
   var clickCount= 0
   var id
-  createBoardArray()
   // As a user when I click on a position, the position changes color so that I can tell that a position has been torpedoed.
   $("td").on("click",function(){
     id= $(this).attr("id")
-    console.log(id);
     $("#"+id).css("background-color", "blue")
-    // As a user I can see how many torpedoes I have used, so that I can keep track
-    clickCount++
-    $("#missilesUsed").text(clickCount)
     var splitId = id.toString().split("");
-    boardArray[splitId[0]][splitId[1]] = 1;
+    
+    // As a user once a position has been torpedoed, it cannot be torpedoed again so that I don't waste torpedoes.
+    if (boardArray[splitId[0]][splitId[1]] === 0){
+      clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+      boardArray[splitId[0]][splitId[1]] = 1; // changes the array to mark it as used
+    } // end of if statement
+    $("#missilesUsed").text(clickCount)
+
 
   })//end of click change color
 })
