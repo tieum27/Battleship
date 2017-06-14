@@ -1,8 +1,6 @@
 
 
-// As a user I have a limit of 25 torpedoes to hit all ships, and when I run out I have lost the game, so that that game is a challenge.
 
-// As a user if I lose, I can see where the ships were, so that I know there were actual ships on the board.
 
 // *******  Controler ******* //
 $(document).ready(function(){
@@ -18,6 +16,7 @@ $(document).ready(function(){
     id= $(this).attr("id")
     var splitId = id.toString().split("");
 
+    // As a user I have a limit of 25 torpedoes to hit all ships, and when I run out I have lost the game, so that that game is a challenge.
     if (missiles >0) {
       // As a user once a position has been torpedoed, it cannot be torpedoed again so that I don't waste torpedoes.
       if (boardArray[splitId[0]][splitId[1]] === 2){
@@ -26,6 +25,7 @@ $(document).ready(function(){
         // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
         alert("It's a HIT !!!!");
         hits++;
+        missiles--;
       } // end of if statement
       else if (boardArray[splitId[0]][splitId[1]] === 0) {
         boardArray[splitId[0]][splitId[1]] = 1; // changes the array to mark it as used
@@ -35,7 +35,9 @@ $(document).ready(function(){
       }
     }
     else {
+      // As a user if I lose, I can see where the ships were, so that I know there were actual ships on the board.
       alert("Game Over!");
+      $(".boat").css("background-color", "black")
     }
     $("#missilesUsed").text(clickCount)
     $("#hits").text(hits)
@@ -84,7 +86,7 @@ function aiBoats() {
       else {
         boardArray[index1][index2] = 2;
         console.log(boardArray[index1],boat);
-        $("#" + index1 + index2).css("background-color", "red");
+        $("#" + index1 + index2).addClass("boat");
       }
   } // end for loop
 } // end Function
