@@ -1,7 +1,6 @@
 
 
 
-// As a user I can see how many torpedoes I have used, so that I can keep track of how many I have used.
 
 // As a user once a position has been torpedoed, it cannot be torpedoed again so that I don't waste torpedoes.
 
@@ -10,12 +9,14 @@
 $(document).ready(function(){
   createTable()
   var clickCount= 0
+  var id
   // As a user when I click on a position, the position changes color so that I can tell that a position has been torpedoed.
   $("td").on("click",function(){
-    var id= $(this).attr("id")
+    id= $(this).attr("id")
     $("#"+id).css("background-color", "tomato")
+    // As a user I can see how many torpedoes I have used, so that I can keep track
     clickCount++
-    $("#counter").text(clickCount)
+    $("#missilesUsed").text(clickCount)
   })//end of click change color
 })
 
@@ -25,6 +26,7 @@ $(document).ready(function(){
 
 
 // As a user I can see a 10 x 10 grid so that I can see the gameboard.
+var boardArray = []
 function createTable() {
   $("#boardGame").append("<table id='boardTable'></table>");
     for (var i = 0; i < 10; i++) {
@@ -35,3 +37,14 @@ function createTable() {
       } // end for loop to create the columns
     } // end for loop to create the rows
 } // end of function createTable
+
+function createBoardArray() {
+    for (var i = 0; i < 10; i++) {
+      boardArray[i] = 0
+      for(var j = 0; j < 10; j++) {
+        boardArray[i][j]= 0
+        console.log(boardArray)
+      }
+    }
+}
+createBoardArray()
