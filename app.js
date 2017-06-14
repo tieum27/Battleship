@@ -10,13 +10,18 @@ $(document).ready(function(){
   createTable()
   var clickCount= 0
   var id
+  createBoardArray()
   // As a user when I click on a position, the position changes color so that I can tell that a position has been torpedoed.
   $("td").on("click",function(){
     id= $(this).attr("id")
-    $("#"+id).css("background-color", "tomato")
+    console.log(id);
+    $("#"+id).css("background-color", "blue")
     // As a user I can see how many torpedoes I have used, so that I can keep track
     clickCount++
     $("#missilesUsed").text(clickCount)
+    var splitId = id.toString().split("");
+    boardArray[splitId[0]][splitId[1]] = 1;
+
   })//end of click change color
 })
 
@@ -38,13 +43,12 @@ function createTable() {
     } // end for loop to create the rows
 } // end of function createTable
 
+// creating the array that will log the board progress
 function createBoardArray() {
-    for (var i = 0; i < 10; i++) {
-      boardArray[i] = 0
-      for(var j = 0; j < 10; j++) {
-        boardArray[i][j]= 0
-        console.log(boardArray)
-      }
-    }
+  for (var i = 0; i < 10; i++) {
+    boardArray[i] = []
+    for(var j = 0; j < 10; j++) {
+      boardArray[i][j]= 0
+    } // end of first for loop
+  } // end of second for loop
 }
-createBoardArray()
