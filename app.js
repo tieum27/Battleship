@@ -1,6 +1,10 @@
 
-
-
+// As a user I don't have ships that touch, so that there is always space between ships.
+// As a user I can torpedo a 5 block ship, so that the game is diverse.
+// As a user I can torpedo two 4 block ships, so that the game is diverse.
+// As a user I can torpedo two 3 block ships,, so that the game is diverse.
+// As a user I can torpedo two 2 block ships, so that the game is diverse.
+// As a user I can torpedo one 1 block submarine, so that the game is diverse.
 
 // *******  Controler ******* //
 $(document).ready(function(){
@@ -41,6 +45,8 @@ $(document).ready(function(){
     }
     $("#missilesUsed").text(clickCount)
     $("#hits").text(hits)
+    // As a user I can see how many torpedoes I have left instead of how many I have used.
+    $("#remaining").text(missiles)
 
   })//end of click change color
 })
@@ -75,6 +81,7 @@ function createBoardArray() {
 
 // As user I expect there to be 5 single length ships on the board.
 // making boats
+
 function aiBoats() {
   for (var b = 0; b < 5; b++){
     var index1 = Math.floor(Math.random() *9);
@@ -90,3 +97,21 @@ function aiBoats() {
       }
   } // end for loop
 } // end Function
+
+//start of checking for touching boats
+function boatTouch(i1, i2) {
+  if (i1 === 0 && i2 === 0){
+    boardArray[i1][i2 + 2]=3
+    boardArray[i1 + 2][i2]=3
+    boardArray[i1 + 2][i2 + 2]=3
+  }
+
+    else if (i1 - 1 === -1){
+    boardArray[i1][i2 + 2]=3
+    boardArray[i1][i2 - 2]=3
+    boardArray[i1 + 2][i2]=3
+    boardArray[i1 + 2][i2 + 2]=3
+    boardArray[i1 + 2][i2 - 2]=3
+  }
+
+}// end of function for checking if boats touch
