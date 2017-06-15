@@ -26,3 +26,15 @@ td  {
 .battleship {
   background-color: orange;
 }
+
+.submarine {
+  background-color: brown;
+}
+
+.cruiser {
+  background-color: purple;
+}
+
+.detroyer {
+  background-color: darkgrey;
+}
