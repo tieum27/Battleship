@@ -128,7 +128,7 @@ function airCarrier(){
 
 // As a user I can torpedo two 4 block ships, so that the game is diverse.
 // Battleship creation
-function battleship(){
+function battleship() {
   for(var z = 0; z < 2; z++){
     var index1 = Math.floor(Math.random() *7);
     var index2 = Math.floor(Math.random() *7);
