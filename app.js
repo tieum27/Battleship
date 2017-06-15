@@ -10,10 +10,10 @@ $(document).ready(function(){
   createBoardArray();
   airCarrier()
   battleship()
-  // cruiser()
-  // submarine()
-  // detroyer()
-  // mine();
+  cruiser()
+  submarine()
+  detroyer()
+  mine();
 
   var clickCount= 0;
   var hits = 0;
@@ -169,9 +169,13 @@ function cruiser() {
   for(var z = 0; z < 1; z++){
     var index1 = Math.floor(Math.random() *8);
     var index2 = Math.floor(Math.random() *8);
-    var boat = boardArray[index1][index2];
+    var cruiser = boardArray[index1][index2];
     var vOrH = Math.round((Math.random() * 1))
-    console.log(vOrH);
+    while (noOverlap(vOrH, 2, index1, index2) || cruiser !== 0){
+        index1 = Math.floor(Math.random() *8);
+        index2 = Math.floor(Math.random() *8);
+        cruiser = boardArray[index1][index2];
+    } //end of while
 
 //nooverlap = true
     if (vOrH === 0){
@@ -195,9 +199,14 @@ function submarine() {
   for(var z = 0; z < 1; z++){
     var index1 = Math.floor(Math.random() *8);
     var index2 = Math.floor(Math.random() *8);
-    var boat = boardArray[index1][index2];
+    var submarine = boardArray[index1][index2];
     var vOrH = Math.round((Math.random() * 1))
-    console.log(vOrH);
+    while (noOverlap(vOrH, 2, index1, index2) || submarine !== 0){
+        index1 = Math.floor(Math.random() *8);
+        index2 = Math.floor(Math.random() *8);
+        submarine = boardArray[index1][index2];
+    } //end of while
+
     if (vOrH === 0){
       for (var ac = 0; ac < 3; ac++){
         let submarine = 8;
@@ -206,7 +215,7 @@ function submarine() {
       }
     }
     else {
-      for (var ac = 0; ac < 4; ac++){
+      for (var ac = 0; ac < 3; ac++){
         let submarine = 8;
         boardArray[index1 + ac][index2] = submarine;
         $("#" + (index1 + ac) + index2).addClass("submarine")
@@ -219,9 +228,13 @@ function detroyer() {
   for(var z = 0; z < 2; z++){
     var index1 = Math.floor(Math.random() *9);
     var index2 = Math.floor(Math.random() *9);
-    var boat = boardArray[index1][index2];
+    var destroyer = boardArray[index1][index2];
     var vOrH = Math.round((Math.random() * 1))
-    console.log(vOrH);
+    while (noOverlap(vOrH, 1, index1, index2) || destroyer !== 0){
+        index1 = Math.floor(Math.random() *9);
+        index2 = Math.floor(Math.random() *9);
+        destroyer = boardArray[index1][index2];
+    } //end of while
     if (vOrH === 0){
       for (var ac = 0; ac < 2; ac++){
         let detroyer = 9;
