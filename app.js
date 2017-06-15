@@ -97,7 +97,6 @@ function aiBoats() {
     boardArray[index1][index2] = 2;
     $("#" + index1 + index2).addClass("boat");
     // carrier
-
   } // end for loop
 } // end Function
 
@@ -163,6 +162,7 @@ function battleship() {
 
 //start of checking for touching boats
 function boatTouch(i1, i2) {
+
   if (i1 === 0 && i2 === 0){
     boardArray[i1][i2 + 1] = 3;
     boardArray [i1 + 1][i2 +1] = 3;
