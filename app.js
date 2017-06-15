@@ -31,7 +31,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
       } // end of if statement
-      else if (boardArray[splitId[0]][splitId[1]] === 0) {
+      else if (boardArray[splitId[0]][splitId[1]] !== 0) {
         boardArray[splitId[0]][splitId[1]] = 1; // changes the array to mark it as used
         $("#"+id).css("background-color", "blue");
         clickCount++;
@@ -83,35 +83,89 @@ function createBoardArray() {
 // making boats
 
 function aiBoats() {
-  for (var b = 0; b < 5; b++){
+  for (var b = 0; b < 2; b++){
     var index1 = Math.floor(Math.random() *9);
     var index2 = Math.floor(Math.random() *9);
-    var boat = boardArray[index1][index2]
-      if (boat === 2){
-        boat = boardArray[Math.floor(Math.random() *9)][Math.floor(Math.random() *9)]
-      } // end if statement
-      else {
-        boardArray[index1][index2] = 2;
-        console.log(boardArray[index1],boat);
-        $("#" + index1 + index2).addClass("boat");
-      }
+    var boat = boardArray[index1][index2];
+    console.log(boat);
+    while (boat === 2 || boat === 3){
+      if (boat === 3){ // cheching for boat position or boat touching
+        console.log("=3");
+        boat = boardArray[Math.floor(Math.random() *9)][Math.floor(Math.random() *9)];
+        boatTouch(index1, index2);
+      } // end of while loop
+      else if (boat === 2) {
+        console.log("=2");
+        boat = boardArray[Math.floor(Math.random() *9)][Math.floor(Math.random() *9)];
+        boatTouch(index1, index2)
+      } //end of if
+    } //end of while
+    boardArray[index1][index2] = 2;
+    boatTouch(index1, index2)
+    console.log(boardArray[index1 - 1], boardArray[index1], boardArray[index1 +1]);
+    $("#" + index1 + index2).addClass("boat");
   } // end for loop
 } // end Function
 
 //start of checking for touching boats
 function boatTouch(i1, i2) {
+
   if (i1 === 0 && i2 === 0){
-    boardArray[i1][i2 + 2]=3
-    boardArray[i1 + 2][i2]=3
-    boardArray[i1 + 2][i2 + 2]=3
+    boardArray[i1][i2 + 1] = 3;
+    boardArray [i1 + 1][i2 +1] = 3;
+    boardArray[i1 + 1][i2] = 3;
   }
-
-    else if (i1 - 1 === -1){
-    boardArray[i1][i2 + 2]=3
-    boardArray[i1][i2 - 2]=3
-    boardArray[i1 + 2][i2]=3
-    boardArray[i1 + 2][i2 + 2]=3
-    boardArray[i1 + 2][i2 - 2]=3
+  else if (i2 === 0){
+    boardArray[i1 - 1][i2] = 3;
+    boardArray[i1 - 1][i2 + 1] = 3;
+    boardArray[i1][i2 + 1] = 3;
+    boardArray [i1 + 1][i2 +1] = 3;
+    boardArray[i1 + 1][i2] = 3;
   }
-
+  else if (i1 === 9 && i2 === 0) {
+    boardArray[i1 - 1][i2] = 3;
+    boardArray[i1 - 1][i2 + 1] = 3;
+    boardArray[i1][i2 + 1] = 3;
+  }
+  else if (i1 === 9) {
+    boardArray [i1 - 1][i2 - 1] = 3;
+    boardArray[i1 - 1][i2] = 3;
+    boardArray[i1 - 1][i2 + 1] = 3;
+    boardArray[i1][i2 + 1] = 3;
+    boardArray[i1][i2 - 1] = 3;
+  }
+  else if (i1 === 9 && i2 === 8) {
+    boardArray [i1 - 1][i2 - 1] = 3;
+    boardArray[i1 - 1][i2] = 3;
+    boardArray[i1][i2 - 1] = 3;
+  }
+  else if (i2 === 9) {
+    boardArray [i1 - 1][i2 - 1] = 3;
+    boardArray[i1 - 1][i2] = 3;
+    boardArray[i1 + 1][i2] = 3;
+    boardArray[i1 + 1][i2 - 1] = 3;
+    boardArray[i1][i2 - 1] = 3;
+  }
+  else if (i1 === 0 && i2 === 9) {
+    boardArray[i1 + 1][i2] = 3;
+    boardArray[i1 + 1][i2 - 1] = 3;
+    boardArray[i1][i2 - 1] = 3;
+  }
+  else if (i1 === 0){
+    boardArray[i1][i2 + 1] = 3;
+    boardArray [i1 + 1][i2 + 1] = 3;
+    boardArray[i1 + 1][i2] = 3;
+    boardArray[i1 + 1][i2 - 1] = 3;
+    boardArray[i1][i2 - 1] = 3;
+  }
+  else {
+    boardArray [i1 - 1][i2 - 1] = 3;
+    boardArray [i1 - 1][i2] = 3;
+    boardArray [i1 - 1][i2 + 1] = 3;
+    boardArray [i1][i2 + 1] = 3;
+    boardArray [i1 + 1][i2 + 1] = 3;
+    boardArray [i1 + 1][i2] = 3;
+    boardArray [i1 + 1][i2 - 1] = 3;
+    boardArray [i1][i2 - 1] = 3;
+  }
 }// end of function for checking if boats touch
