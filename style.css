@@ -14,3 +14,15 @@ td  {
   border-color: black;
   border-style: solid;
 }
+
+.boat {
+  background-color: tomato;
+}
+
+.carrier {
+  background-color: green;
+}
+
+.battleship {
+  background-color: orange;
+}
