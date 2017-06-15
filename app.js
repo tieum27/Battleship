@@ -140,8 +140,8 @@ function battleship() {
     var battleship = boardArray[index1][index2];
     var vOrH = Math.round((Math.random() * 1))
     while (noOverlap(vOrH, 3, index1, index2) || battleship !== 0){
-        index1 = Math.floor(Math.random() *9);
-        index2 = Math.floor(Math.random() *9);
+        index1 = Math.floor(Math.random() *7);
+        index2 = Math.floor(Math.random() *7);
         battleship = boardArray[index1][index2];
     } //end of while
 
@@ -258,21 +258,23 @@ function mine() {
 
 //overlap function
 function noOverlap (vOrH, length, index1, index2) {
-  var posTaken = true
+  var posTaken = false
   if (vOrH === 0){
     for (var ac = 0; ac < length; ac++){
       if (boardArray[index1][index2 + ac] !== 0) {
-        posTaken = false
+        posTaken = true
       }
     }
   }
   else {
     for (var ac = 0; ac < length; ac++){
+      // debugger
       if (boardArray[index1 + ac][index2] !== 0) {
-        posTaken = false
+        posTaken = true
       }
     }
   }
+  console.log(posTaken);
   return posTaken
 } //end overlap function
 //start of checking for touching boats
