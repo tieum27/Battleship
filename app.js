@@ -18,7 +18,15 @@ $(document).ready(function(){
   var clickCount= 0;
   var hits = 0;
   var id;
-  var missiles = 25
+  var missiles = 25;
+  var count5 = 0;
+  var count6 = 0;
+  var count7 = 0;
+  var count8 = 0;
+  var count9 = 0;
+  var count10 = 0;
+  var count11 = 0;
+  var count12 = 0;
 
   // As a user when I click on a position, the position changes color so that I can tell that a position has been torpedoed.
   $("td").on("click",function(){
@@ -30,12 +38,99 @@ $(document).ready(function(){
       // As a user once a position has been torpedoed, it cannot be torpedoed again so that I don't waste torpedoes.
       if (boardArray[splitId[0]][splitId[1]] === 5){
         clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
-        $("#"+id).css("background-color", "yellow");
         // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
-        alert("It's a HIT !!!!");
         hits++;
         missiles--;
+        count5++;
+        alert("It's a HIT !!!!");
+        if (count5 === 5){
+          alert("You sunk the Aircraft Carrier!!")
+          $("#destroyed").append("<p>Aircraft Carrier</p>")
+        }
       } // end of if statement
+      else if (boardArray[splitId[0]][splitId[1]] === 6) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        count6++;
+        alert("It's a HIT !!!!");
+        if (count6 === 4){
+          alert("You sunk the Battleship!!")
+          $("#destroyed").append("<p>Battleship 1</p>")
+        }
+      }
+      else if (boardArray[splitId[0]][splitId[1]] === 7) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        alert("It's a HIT !!!!");
+        count7++;
+        if (count7 === 4){
+          alert("You sunk the Battleship!!")
+          $("#destroyed").append("<p>Battleship 2</p>")
+        }
+      }
+      else if (boardArray[splitId[0]][splitId[1]] === 8) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        alert("It's a HIT !!!!");
+        count8++;
+        if (count8 === 3){
+          alert("You sunk the Cruiser!!")
+          $("#destroyed").append("<p>Cruiser</p>")
+        }
+      }
+      else if (boardArray[splitId[0]][splitId[1]] === 9) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        alert("It's a HIT !!!!");
+        count9++;
+        if (count9 === 3){
+          alert("You sunk the Submarine!!")
+          $("#destroyed").append("<p>Submarine</p>")
+        }
+      }
+      else if (boardArray[splitId[0]][splitId[1]] === 10) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        alert("It's a HIT !!!!");
+        count10++;
+        if (count10 === 2){
+          alert("You sunk the Destroyer!!")
+          $("#destroyed").append("<p>Destroyer</p>")
+        }
+      }
+      else if (boardArray[splitId[0]][splitId[1]] === 11) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        alert("It's a HIT !!!!");
+        count11++;
+        if (count11 === 2){
+          alert("You sunk the Destroyer!!")
+          $("#destroyed").append("<p>Destroyer</p>")
+        }
+      }
+      else if(boardArray[splitId[0]][splitId[1]] === 12) {
+        clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+        // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+        hits++;
+        missiles--;
+        alert("It's a HIT !!!!");
+        count12++;
+        (count12 === 1)
+          alert("You blew up the Mine!!")
+          $("#destroyed").append("<p>Mine</p>")
+      }
       else if (boardArray[splitId[0]][splitId[1]] !== 0 || boardArray[splitId[0]][splitId[1]] === 0) {
         boardArray[splitId[0]][splitId[1]] = 1; // changes the array to mark it as used
         $("#"+id).css("background-color", "blue");
@@ -85,33 +180,15 @@ function createBoardArray() {
 }
 
 // making boats
-function aiBoats() {
-  for (var b = 0; b < 1; b++){
-    var index1 = Math.floor(Math.random() *9);
-    var index2 = Math.floor(Math.random() *9);
-    var boat = boardArray[index1][index2];
-    console.log(boat);
-    while (boat !== 0){
-        index1 = Math.floor(Math.random() *9);
-        index2 = Math.floor(Math.random() *9);
-        boat = boardArray[index1][index2];
-    } //end of while
-    boatTouch(index1, index2)
-    boardArray[index1][index2] = 2;
-    $("#" + index1 + index2).addClass("boat");
-    // carrier
-  } // end for loop
-} // end Function
 
 
 // As user I expect there to be 5 single length ships on the board.
 //Carrier creation
 function airCarrier(){
   var index1 = Math.floor(Math.random() *6);
-  var index2 = Math.floor(Math.random() *6);
+  var index2 =  Math.floor(Math.random() *6);
   var boat = boardArray[index1][index2];
   var vOrH = Math.round((Math.random() * 1))
-  console.log(vOrH);
   if (vOrH === 0){
     for (var ac = 0; ac < 5; ac++){
       //boatTouch(index1, (index2 + ac))
@@ -135,11 +212,12 @@ function airCarrier(){
 // Battleship creation
 function battleship() {
   for(var z = 0; z < 2; z++){
-    var index1 = Math.floor(Math.random() *7);
-    var index2 = Math.floor(Math.random() *7);
+    var index1 =  2//Math.floor(Math.random() *7);
+    var index2 =  2 //Math.floor(Math.random() *7);
     var battleship = boardArray[index1][index2];
-    var vOrH = Math.round((Math.random() * 1))
-    while (noOverlap(vOrH, 3, index1, index2) || battleship !== 0){
+    var vOrH =  0 //Math.round((Math.random() * 1))
+//debugger
+    while (noOverlap(vOrH, 3, index1, index2) && battleship !== 0){
         index1 = Math.floor(Math.random() *7);
         index2 = Math.floor(Math.random() *7);
         battleship = boardArray[index1][index2];
@@ -147,16 +225,24 @@ function battleship() {
 
     if (vOrH === 0){
       for (var ac = 0; ac < 4; ac++){
-        //boatTouch(index1, (index2 + ac))
-        let battleship = 6;
+        if (z === 0) {
+          battleship = 6;
+        }
+        else {
+          battleship = 7;
+        }
         boardArray[index1][index2 + ac] = battleship;
         $("#" + index1 + (index2 + ac)).addClass("battleship")
       }
     }
     else {
       for (var ac = 0; ac < 4; ac++){
-        // boatTouch((index1 + ac), index2)
-        let battleship = 6;
+        if (z === 0) {
+          battleship = 6;
+        }
+        else {
+          battleship = 7;
+        }
         boardArray[index1 + ac][index2] = battleship;
         $("#" + (index1 + ac) + index2).addClass("battleship")
       }
@@ -176,18 +262,16 @@ function cruiser() {
         index2 = Math.floor(Math.random() *8);
         cruiser = boardArray[index1][index2];
     } //end of while
-
-//nooverlap = true
     if (vOrH === 0){
       for (var ac = 0; ac < 3; ac++){
-        let cruiser = 7;
+        let cruiser = 8;
         boardArray[index1][index2 + ac] = cruiser;
         $("#" + index1 + (index2 + ac)).addClass("cruiser")
       }
     }
     else {
       for (var ac = 0; ac < 3; ac++){
-        let cruiser = 7;
+        let cruiser = 8;
         boardArray[index1 + ac][index2] = cruiser;
         $("#" + (index1 + ac) + index2).addClass("cruiser")
       }
@@ -209,14 +293,14 @@ function submarine() {
 
     if (vOrH === 0){
       for (var ac = 0; ac < 3; ac++){
-        let submarine = 8;
+        submarine = 9;
         boardArray[index1][index2 + ac] = submarine;
         $("#" + index1 + (index2 + ac)).addClass("submarine")
       }
     }
     else {
       for (var ac = 0; ac < 3; ac++){
-        let submarine = 8;
+        submarine = 9;
         boardArray[index1 + ac][index2] = submarine;
         $("#" + (index1 + ac) + index2).addClass("submarine")
       }
@@ -237,14 +321,24 @@ function detroyer() {
     } //end of while
     if (vOrH === 0){
       for (var ac = 0; ac < 2; ac++){
-        let detroyer = 9;
+        if (z === 0) {
+          detroyer = 10;
+        }
+        else {
+          destroyer = 11;
+        }
         boardArray[index1][index2 + ac] = detroyer;
         $("#" + index1 + (index2 + ac)).addClass("detroyer")
       }
     }
     else {
       for (var ac = 0; ac < 2; ac++){
-        let detroyer = 9;
+        if (z === 0) {
+          detroyer = 10;
+        }
+        else {
+          destroyer = 11;
+        }
         boardArray[index1 + ac][index2] = detroyer;
         $("#" + (index1 + ac) + index2).addClass("detroyer")
       }
@@ -263,8 +357,7 @@ function mine() {
         index2 = Math.floor(Math.random() *9);
         mine = boardArray[index1][index2];
     } //end of while
-    boatTouch(index1, index2)
-    boardArray[index1][index2] = 10;
+    boardArray[index1][index2] = 12;
     $("#" + index1 + index2).addClass("mine");
   } // end for loop
 } // end mine creation
@@ -281,15 +374,15 @@ function noOverlap (vOrH, length, index1, index2) {
   }
   else {
     for (var ac = 0; ac < length; ac++){
-      // debugger
+     // debugger
       if (boardArray[index1 + ac][index2] !== 0) {
         posTaken = true
       }
     }
   }
-  console.log(posTaken);
   return posTaken
 } //end overlap function
+
 //start of checking for touching boats
 function boatTouch(i1, i2) {
 
@@ -352,3 +445,12 @@ function boatTouch(i1, i2) {
     boardArray [i1][i2 - 1] = 3;
   }
 }// end of function for checking if boats touch
+
+//function for click and hit increase
+function clickInc() {
+  clickCount++; // As a user I can see how many torpedoes I have used, so that I can keep track
+  // As a user when I click on a position I can see if there was a ship at that location so that I can see if I hit a ship. If there is a ship it counts as a hit.
+  alert("It's a HIT !!!!");
+  hits++;
+  missiles--;
+} //end of function for click increase
