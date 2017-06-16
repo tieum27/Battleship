@@ -12,13 +12,21 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>Battleship</header>
-    <div id="boardGame">
-    </div>
-    <div id="counter">
-      <table>
-        <thead>User Statistics</thead>
-          <tr>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <header><h1>Battleship</h1></header>
+      </div>
+      </div>
+      <div class="row">
+      <div  id="boardGame" class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <table>
+          <thead>User Statistics</thead>
+          <tr class="stats">
             <th>Missles used</th>
             <th>Hits</th>
             <th>Misslies Left</th>
@@ -30,8 +38,10 @@
             <td id="remaining"></td>
             <td id="destroyed"></td>
           </tr>
-      </table>
+        </table>
+      </div>
     </div>
+  </div>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   </body>
 </html>

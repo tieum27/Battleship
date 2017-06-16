@@ -18,7 +18,7 @@ $(document).ready(function(){
   var clickCount= 0;
   var hits = 0;
   var id;
-  var missiles = 25;
+  var missiles = 50;
   var count5 = 0;
   var count6 = 0;
   var count7 = 0;
@@ -43,9 +43,12 @@ $(document).ready(function(){
         missiles--;
         count5++;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         if (count5 === 5){
           alert("You sunk the Aircraft Carrier!!")
           $("#destroyed").append("<p>Aircraft Carrier</p>")
+
+
         }
       } // end of if statement
       else if (boardArray[splitId[0]][splitId[1]] === 6) {
@@ -55,6 +58,7 @@ $(document).ready(function(){
         missiles--;
         count6++;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         if (count6 === 4){
           alert("You sunk the Battleship!!")
           $("#destroyed").append("<p>Battleship 1</p>")
@@ -66,6 +70,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         count7++;
         if (count7 === 4){
           alert("You sunk the Battleship!!")
@@ -78,6 +83,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         count8++;
         if (count8 === 3){
           alert("You sunk the Cruiser!!")
@@ -90,6 +96,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         count9++;
         if (count9 === 3){
           alert("You sunk the Submarine!!")
@@ -102,6 +109,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         count10++;
         if (count10 === 2){
           alert("You sunk the Destroyer!!")
@@ -114,6 +122,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         count11++;
         if (count11 === 2){
           alert("You sunk the Destroyer!!")
@@ -126,6 +135,7 @@ $(document).ready(function(){
         hits++;
         missiles--;
         alert("It's a HIT !!!!");
+        $("#" + id).css("background-color", "red")
         count12++;
         (count12 === 1)
           alert("You blew up the Mine!!")
@@ -141,7 +151,12 @@ $(document).ready(function(){
     else {
       // As a user if I lose, I can see where the ships were, so that I know there were actual ships on the board.
       alert("Game Over!");
-      $(".boat").css("background-color", "black")
+      $(".carrier").css("background-color", "green")
+      $(".battleship").css("background-color", "orange")
+      $(".submarine").css("background-color", "brown")
+      $(".cruiser").css("background-color", "purple")
+      $(".destroyer").css("background-color", "darkgrey")
+      $(".mine").css("background-color", "black")
     }
     $("#missilesUsed").text(clickCount)
     $("#hits").text(hits)
@@ -165,6 +180,7 @@ function createTable() {
       + i + " class='boardRow'></tr>");
       for(var j = 0; j < 10; j++) {
         $("#" + i).append("<td id=" + i + j + " class='boardCell' ></td>");
+
       } // end for loop to create the columns
     } // end for loop to create the rows
 } // end of function createTable
@@ -186,7 +202,7 @@ function createBoardArray() {
 //Carrier creation
 function airCarrier(){
   var index1 = Math.floor(Math.random() *6);
-  var index2 =  Math.floor(Math.random() *6);
+  var index2 = Math.floor(Math.random() *6);
   var boat = boardArray[index1][index2];
   var vOrH = Math.round((Math.random() * 1))
   if (vOrH === 0){
@@ -195,6 +211,7 @@ function airCarrier(){
       let carrier = 5;
       boardArray[index1][index2 + ac] = carrier;
       $("#" + index1 + (index2 + ac)).addClass("carrier")
+      $("#" + index1 + (index2+ ac)).addClass("boatHere");
     }
   }
   else {
@@ -203,8 +220,10 @@ function airCarrier(){
       let carrier = 5;
       boardArray[index1 + ac][index2] = carrier;
       $("#" + (index1 + ac) + index2).addClass("carrier")
+      $("#" + (index1 + ac) + index2).addClass("boatHere");
+      // $(".custom-radio").addClass("hitButton")
     }
-    boatTouch(index1, index2)
+    // boatTouch(index1, index2)
   }
 }//end of Carrier creation
 
@@ -212,12 +231,11 @@ function airCarrier(){
 // Battleship creation
 function battleship() {
   for(var z = 0; z < 2; z++){
-    var index1 =  2//Math.floor(Math.random() *7);
-    var index2 =  2 //Math.floor(Math.random() *7);
+    var index1 = Math.floor(Math.random() *7);
+    var index2 = Math.floor(Math.random() *7);
     var battleship = boardArray[index1][index2];
-    var vOrH =  0 //Math.round((Math.random() * 1))
-//debugger
-    while (noOverlap(vOrH, 3, index1, index2) && battleship !== 0){
+    var vOrH = Math.round((Math.random() * 1))
+    while (noOverlap(vOrH, 3, index1, index2)){
         index1 = Math.floor(Math.random() *7);
         index2 = Math.floor(Math.random() *7);
         battleship = boardArray[index1][index2];
@@ -233,6 +251,8 @@ function battleship() {
         }
         boardArray[index1][index2 + ac] = battleship;
         $("#" + index1 + (index2 + ac)).addClass("battleship")
+        $("#" + index1 + (index2 + ac)).addClass("boatHere");
+        // $(".custom-radio").addClass("hitButton")
       }
     }
     else {
@@ -245,6 +265,8 @@ function battleship() {
         }
         boardArray[index1 + ac][index2] = battleship;
         $("#" + (index1 + ac) + index2).addClass("battleship")
+        $("#" + (index1 + ac) + index2).addClass("boatHere");
+        // $(".custom-radio").addClass("hitButton")
       }
     }
   }
@@ -267,6 +289,8 @@ function cruiser() {
         let cruiser = 8;
         boardArray[index1][index2 + ac] = cruiser;
         $("#" + index1 + (index2 + ac)).addClass("cruiser")
+        $("#" + index1 + index2).addClass("boatHere");
+        // $(".custom-radio").addClass("hitButton")
       }
     }
     else {
@@ -274,6 +298,8 @@ function cruiser() {
         let cruiser = 8;
         boardArray[index1 + ac][index2] = cruiser;
         $("#" + (index1 + ac) + index2).addClass("cruiser")
+        $("#" + index1 + index2).addClass("boatHere");
+        // $(".custom-radio").addClass("hitButton")
       }
     }
   }
@@ -296,6 +322,7 @@ function submarine() {
         submarine = 9;
         boardArray[index1][index2 + ac] = submarine;
         $("#" + index1 + (index2 + ac)).addClass("submarine")
+        // $(".custom-radio").addClass("hitButton")
       }
     }
     else {
@@ -303,6 +330,8 @@ function submarine() {
         submarine = 9;
         boardArray[index1 + ac][index2] = submarine;
         $("#" + (index1 + ac) + index2).addClass("submarine")
+        $("#" + index1 + index2).addClass("boatHere");
+        // $(".custom-radio").addClass("hitButton")
       }
     }
   }
@@ -329,6 +358,8 @@ function detroyer() {
         }
         boardArray[index1][index2 + ac] = detroyer;
         $("#" + index1 + (index2 + ac)).addClass("detroyer")
+        $("#" + index1 + index2).addClass("boatHere");
+        // $(".custom-radio").addClass("hitButton")
       }
     }
     else {
@@ -341,6 +372,7 @@ function detroyer() {
         }
         boardArray[index1 + ac][index2] = detroyer;
         $("#" + (index1 + ac) + index2).addClass("detroyer")
+        // $(".custom-radio").addClass("hitButton")
       }
     }
   }
@@ -359,15 +391,20 @@ function mine() {
     } //end of while
     boardArray[index1][index2] = 12;
     $("#" + index1 + index2).addClass("mine");
+    $("#" + index1 + index2).addClass("boatHere");
+    // $(".custom-radio").addClass("hitButton")
   } // end for loop
 } // end mine creation
 
 //overlap function
-function noOverlap (vOrH, length, index1, index2) {
-  var posTaken = false
+function noOverlap (vOrH, length, index1, index2,) {
+  var posTaken = false;
+  if (boardArray[index1][index2] !== 0){
+    posTaken = true
+  }
   if (vOrH === 0){
     for (var ac = 0; ac < length; ac++){
-      if (boardArray[index1][index2 + ac] !== 0) {
+      if ($("#" + index1 + (index2 + ac)).is("#boatHere")) {
         posTaken = true
       }
     }
@@ -375,7 +412,7 @@ function noOverlap (vOrH, length, index1, index2) {
   else {
     for (var ac = 0; ac < length; ac++){
      // debugger
-      if (boardArray[index1 + ac][index2] !== 0) {
+      if ($("#" + index1 + (index2 + ac)).is("#boatHere")) {
         posTaken = true
       }
     }
@@ -383,68 +420,70 @@ function noOverlap (vOrH, length, index1, index2) {
   return posTaken
 } //end overlap function
 
-//start of checking for touching boats
-function boatTouch(i1, i2) {
 
-  if (i1 === 0 && i2 === 0){
-    boardArray[i1][i2 + 1] = 3;
-    boardArray [i1 + 1][i2 +1] = 3;
-    boardArray[i1 + 1][i2] = 3;
-  }
-  else if (i2 === 0){
-    boardArray[i1 - 1][i2] = 3;
-    boardArray[i1 - 1][i2 + 1] = 3;
-    boardArray[i1][i2 + 1] = 3;
-    boardArray [i1 + 1][i2 +1] = 3;
-    boardArray[i1 + 1][i2] = 3;
-  }
-  else if (i1 === 9 && i2 === 0) {
-    boardArray[i1 - 1][i2] = 3;
-    boardArray[i1 - 1][i2 + 1] = 3;
-    boardArray[i1][i2 + 1] = 3;
-  }
-  else if (i1 === 9) {
-    boardArray [i1 - 1][i2 - 1] = 3;
-    boardArray[i1 - 1][i2] = 3;
-    boardArray[i1 - 1][i2 + 1] = 3;
-    boardArray[i1][i2 + 1] = 3;
-    boardArray[i1][i2 - 1] = 3;
-  }
-  else if (i1 === 9 && i2 === 8) {
-    boardArray [i1 - 1][i2 - 1] = 3;
-    boardArray[i1 - 1][i2] = 3;
-    boardArray[i1][i2 - 1] = 3;
-  }
-  else if (i2 === 9) {
-    boardArray [i1 - 1][i2 - 1] = 3;
-    boardArray[i1 - 1][i2] = 3;
-    boardArray[i1 + 1][i2] = 3;
-    boardArray[i1 + 1][i2 - 1] = 3;
-    boardArray[i1][i2 - 1] = 3;
-  }
-  else if (i1 === 0 && i2 === 9) {
-    boardArray[i1 + 1][i2] = 3;
-    boardArray[i1 + 1][i2 - 1] = 3;
-    boardArray[i1][i2 - 1] = 3;
-  }
-  else if (i1 === 0){
-    boardArray[i1][i2 + 1] = 3;
-    boardArray [i1 + 1][i2 + 1] = 3;
-    boardArray[i1 + 1][i2] = 3;
-    boardArray[i1 + 1][i2 - 1] = 3;
-    boardArray[i1][i2 - 1] = 3;
-  }
-  else {
-    boardArray [i1 - 1][i2 - 1] = 3;
-    boardArray [i1 - 1][i2] = 3;
-    boardArray [i1 - 1][i2 + 1] = 3;
-    boardArray [i1][i2 + 1] = 3;
-    boardArray [i1 + 1][i2 + 1] = 3;
-    boardArray [i1 + 1][i2] = 3;
-    boardArray [i1 + 1][i2 - 1] = 3;
-    boardArray [i1][i2 - 1] = 3;
-  }
-}// end of function for checking if boats touch
+
+//start of checking for touching boats
+// function boatTouch(i1, i2) {
+//
+//   if (i1 === 0 && i2 === 0){
+//     boardArray[i1][i2 + 1] = 3;
+//     boardArray [i1 + 1][i2 +1] = 3;
+//     boardArray[i1 + 1][i2] = 3;
+//   }
+//   else if (i2 === 0){
+//     boardArray[i1 - 1][i2] = 3;
+//     boardArray[i1 - 1][i2 + 1] = 3;
+//     boardArray[i1][i2 + 1] = 3;
+//     boardArray [i1 + 1][i2 +1] = 3;
+//     boardArray[i1 + 1][i2] = 3;
+//   }
+//   else if (i1 === 9 && i2 === 0) {
+//     boardArray[i1 - 1][i2] = 3;
+//     boardArray[i1 - 1][i2 + 1] = 3;
+//     boardArray[i1][i2 + 1] = 3;
+//   }
+//   else if (i1 === 9) {
+//     boardArray [i1 - 1][i2 - 1] = 3;
+//     boardArray[i1 - 1][i2] = 3;
+//     boardArray[i1 - 1][i2 + 1] = 3;
+//     boardArray[i1][i2 + 1] = 3;
+//     boardArray[i1][i2 - 1] = 3;
+//   }
+//   else if (i1 === 9 && i2 === 8) {
+//     boardArray [i1 - 1][i2 - 1] = 3;
+//     boardArray[i1 - 1][i2] = 3;
+//     boardArray[i1][i2 - 1] = 3;
+//   }
+//   else if (i2 === 9) {
+//     boardArray [i1 - 1][i2 - 1] = 3;
+//     boardArray[i1 - 1][i2] = 3;
+//     boardArray[i1 + 1][i2] = 3;
+//     boardArray[i1 + 1][i2 - 1] = 3;
+//     boardArray[i1][i2 - 1] = 3;
+//   }
+//   else if (i1 === 0 && i2 === 9) {
+//     boardArray[i1 + 1][i2] = 3;
+//     boardArray[i1 + 1][i2 - 1] = 3;
+//     boardArray[i1][i2 - 1] = 3;
+//   }
+//   else if (i1 === 0){
+//     boardArray[i1][i2 + 1] = 3;
+//     boardArray [i1 + 1][i2 + 1] = 3;
+//     boardArray[i1 + 1][i2] = 3;
+//     boardArray[i1 + 1][i2 - 1] = 3;
+//     boardArray[i1][i2 - 1] = 3;
+//   }
+//   else {
+//     boardArray [i1 - 1][i2 - 1] = 3;
+//     boardArray [i1 - 1][i2] = 3;
+//     boardArray [i1 - 1][i2 + 1] = 3;
+//     boardArray [i1][i2 + 1] = 3;
+//     boardArray [i1 + 1][i2 + 1] = 3;
+//     boardArray [i1 + 1][i2] = 3;
+//     boardArray [i1 + 1][i2 - 1] = 3;
+//     boardArray [i1][i2 - 1] = 3;
+//   }
+// }// end of function for checking if boats touch
 
 //function for click and hit increase
 function clickInc() {
